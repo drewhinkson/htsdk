@@ -1,17 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const EventLogger = ({ events }) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [animation, setAnimation] = useState(false);
+  const prevEventsLengthRef = useRef(events.length);
   
-  // Add animation when a new event is received
- 
+  useEffect(() => {
+    if (events.length > prevEventsLengthRef.current) {
+      setAnimation(false);
+      
+      setTimeout(() => {
+        setAnimation(true);
+        
+        const timer = setTimeout(() => {
+          setAnimation(false);
+        }, 1500);
+        
+        return () => clearTimeout(timer);
+      }, 10);
+    }
+    
+    prevEventsLengthRef.current = events.length;
+  }, [events.length]);
   
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
   
-  // Get event type icon
   const getEventIcon = (type) => {
     switch(type) {
       case 'page':
@@ -27,7 +42,6 @@ const EventLogger = ({ events }) => {
     }
   };
   
-  // Get event color class
   const getEventClass = (type) => {
     switch(type) {
       case 'page':
@@ -43,6 +57,7 @@ const EventLogger = ({ events }) => {
     }
   };
   
+  // Format the timestamp
   const formatTime = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleTimeString();
@@ -143,6 +158,7 @@ const EventLogger = ({ events }) => {
     }
   };
 
+  
   const latestEvent = events.length > 0 ? events[events.length - 1] : null;
 
   return (
