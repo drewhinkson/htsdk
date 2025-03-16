@@ -7,37 +7,55 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Hightouch Events SDK Demo"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <title>Hightouch Events Visual</title>
+    
+    <!-- Hightouch Events SDK -->
+    <script type="text/javascript">
+      !function(){
+        var e=window.htevents=window.htevents||[];
+        if(!e.initialize) {
+          if(e.invoked) {
+            window.console && console.error && console.error("Hightouch snippet included twice.");
+          } else {
+            e.invoked=!0;
+            e.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];
+            e.factory=function(t){
+              return function(){
+                var n=Array.prototype.slice.call(arguments);
+                n.unshift(t);
+                e.push(n);
+                return e;
+              }
+            };
+            for(var t=0;t<e.methods.length;t++){
+              var n=e.methods[t];
+              e[n]=e.factory(n);
+            }
+            e.load=function(t,n){
+              var o=document.createElement("script");
+              o.type="text/javascript";
+              o.async=!0;
+              o.src="https://cdn.hightouch-events.com/browser/release/v1-latest/events.min.js";
+              var r=document.getElementsByTagName("script")[0];
+              r.parentNode.insertBefore(o,r);
+              e._loadOptions=n;
+              e._writeKey=t;
+            };
+            e.SNIPPET_VERSION="0.0.1";
+            e.load('f0212b164993bb1a897ad775ab65ca15d78436cc10669e3ee97a3534ba2292e2',{apiHost:'us-east-1.hightouch-events.com'});
+            // We'll handle page tracking in our React app instead of here
+            // e.page();
+          }
+        }
+      }();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
