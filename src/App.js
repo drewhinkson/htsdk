@@ -56,13 +56,11 @@ function App() {
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    // Override the track method to log events
     const originalTrack = htevents.track;
     htevents.track = function() {
       const eventName = arguments[0];
       const properties = arguments[1] || {};
       
-      // Log the event
       setEvents(prev => [...prev, {
         type: 'track',
         name: eventName,
@@ -83,7 +81,6 @@ function App() {
       const name = arguments[1];
       const properties = arguments[2] || {};
       
-      // Log the page view
       setEvents(prev => [...prev, {
         type: 'page',
         category,
@@ -92,11 +89,9 @@ function App() {
         timestamp: new Date().toISOString()
       }]);
       
-      // Call the original page method
       return originalPage.apply(this, arguments);
     };
 
-    // Override the identify method
     const originalIdentify = htevents.identify;
     htevents.identify = function() {
       const userId = arguments[0];
@@ -105,7 +100,6 @@ function App() {
       // Update the userId state
       setUserId(userId);
       
-      // Log the identify call
       setEvents(prev => [...prev, {
         type: 'identify',
         userId,
@@ -115,7 +109,6 @@ function App() {
       
       console.log(`User identified: ${userId}`, traits);
       
-      // Call the original identify method
       return originalIdentify.apply(this, arguments);
     };
 

@@ -51,20 +51,17 @@ const Profile = ({ userId, setUserId }) => {
   const handleProfileUpdate = (e) => {
     e.preventDefault();
     
-    // Track profile update event
     htevents.track('Profile Updated', {
       userId: userId,
       updatedFields: Object.keys(formData).filter(key => formData[key]),
       timestamp: new Date().toISOString()
     });
     
-    // Update the user traits
     htevents.identify(userId, {
       ...formData,
       profileUpdatedAt: new Date().toISOString()
     });
     
-    // Show success message (in a real app)
     alert('Profile updated successfully!');
   };
 

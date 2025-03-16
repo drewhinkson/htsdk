@@ -20,7 +20,7 @@ const LoginForm = ({ onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Simple validation
+
     if (!formData.email || !formData.password) {
       setError('Please fill in all fields');
       return;
@@ -31,13 +31,9 @@ const LoginForm = ({ onLogin }) => {
       return;
     }
     
-    // In a real app, you would validate with a server
-    // For this demo, we'll just accept the login
-    
-    // Generate a user ID based on email
+   
     const userId = `user-${formData.email.split('@')[0]}`;
     
-    // Call the onLogin callback with user info
     onLogin(userId, {
       email: formData.email,
       lastLogin: new Date().toISOString()

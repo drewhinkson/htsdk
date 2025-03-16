@@ -4,34 +4,27 @@ const Home = () => {
   const htevents = window.htevents;
   const [isAnimating, setIsAnimating] = useState(false);
   
-  // Event configuration options
   const [eventConfig, setEventConfig] = useState({
     useProperties: true,
     useContextOverrides: false
   });
  
-  // Handle button click with optional configurations
   const handleButtonClick = () => {
     setIsAnimating(true);
    
-    // Base event name
     const eventName = 'Button Clicked';
     
-    // Optional properties
     const properties = eventConfig.useProperties ? {
       location: 'Home Page',
       buttonName: 'Welcome Button'
-      // Removed clickCount property
     } : {};
     
    
     const context = eventConfig.useContextOverrides ? {
-      // Only override specific context fields
       page: {
         title: 'Custom Page Title', 
         referrer: 'https://example.com' 
       },
-      // more context things
       campaign: {
         name: "Demo Campaign",
         source: "Hightouch Demo"

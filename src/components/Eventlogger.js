@@ -51,13 +51,11 @@ const EventLogger = ({ events }) => {
     }
   };
   
-  // Format the timestamp
   const formatTime = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleTimeString();
   };
   
-  // Format event details based on type
   const formatEventDetails = (event) => {
     switch(event.type) {
       case 'page':
@@ -73,14 +71,11 @@ const EventLogger = ({ events }) => {
     }
   };
   
-  // Format event properties for display (always expanded)
   const formatEventProperties = (event) => {
-    // Don't show properties if there aren't any
     if (!event.properties || Object.keys(event.properties).length === 0) {
       return null;
     }
     
-    // Customize display based on event type
     switch(event.type) {
       case 'page':
         return (
@@ -156,7 +151,6 @@ const EventLogger = ({ events }) => {
     }
   };
 
-  // Only display the most recent event
   const latestEvent = events.length > 0 ? events[events.length - 1] : null;
 
   return (
@@ -193,7 +187,6 @@ const EventLogger = ({ events }) => {
                 </div>
                 <div className="event-time">{formatTime(latestEvent.timestamp)}</div>
                 
-                {/* Always expanded event properties */}
                 {formatEventProperties(latestEvent)}
               </div>
               {animation && <div className="event-highlight"></div>}
