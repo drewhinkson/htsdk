@@ -5,15 +5,7 @@ const EventLogger = ({ events }) => {
   const [animation, setAnimation] = useState(false);
   
   // Add animation when a new event is received
-  useEffect(() => {
-    if (events.length > 0) {
-      setAnimation(true);
-      const timer = setTimeout(() => {
-        setAnimation(false);
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [events.length]);
+ 
   
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -172,7 +164,6 @@ const EventLogger = ({ events }) => {
               <div className="no-events-icon">📊</div>
               <p>No events tracked yet. Interact with the app to see the latest event here.</p>
               <div className="no-events-hint">
-                Try clicking buttons, navigating pages, or updating your profile!
               </div>
             </div>
           ) : (
