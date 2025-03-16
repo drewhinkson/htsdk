@@ -46,7 +46,8 @@
               e._writeKey=t;
             };
             e.SNIPPET_VERSION="0.0.1";
-            e.load('f0212b164993bb1a897ad775ab65ca15d78436cc10669e3ee97a3534ba2292e2',{apiHost:'us-east-1.hightouch-events.com'});
+            e.load('%REACT_APP_HIGHTOUCH_WRITE_KEY%',{apiHost:'us-east-1.hightouch-events.com'}); // replacing the react - app -hightouch - write with your key
+            
           }
         }
       }();
